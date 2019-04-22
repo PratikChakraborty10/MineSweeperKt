@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorDangerLevelLow">#0E901A</color>
+    <color name="colorDangerLevelMedium">#FF6F00</color>
+    <color name="colorDangerLevelHigh">#B71C1C</color>
+</resources>
