@@ -55,9 +55,9 @@ data class MSKMap(
                 if (mineBlock.dangerLevel == 0)
                     mineBlock.surroundingBlocks().filter { !it.cleared }.forEach { clearBlock(it.x, it.y) }
             } else {
-                val surroundingBlocks = mineBlock.surroundingBlocks()
-                if (surroundingBlocks.filter { it.flagged }.size == mineBlock.dangerLevel && mineBlock.dangerLevel != 0) {
-                    surroundingBlocks.filter { !it.cleared }.forEach {
+                val flaggedSurroundingBlocks = mineBlock.surroundingBlocks().filter { it.flagged }
+                if (flaggedSurroundingBlocks.size == mineBlock.dangerLevel && mineBlock.dangerLevel != 0) {
+                    mineBlock.surroundingBlocks().filter { !it.cleared }.forEach {
                         clearBlock(it.x, it.y)
                     }
                 }

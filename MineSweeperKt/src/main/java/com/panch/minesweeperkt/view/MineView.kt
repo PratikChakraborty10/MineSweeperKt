@@ -17,30 +17,6 @@ class MineView : FrameLayout {
     var resourceFlag = R.drawable.ic_flag
     var resourceMineBomb = R.drawable.mine_bomb
 
-    constructor(_listener: MineBlockListener? = null, context: Context) : super(context) {
-        if (_listener != null)
-            listener = _listener
-    }
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-
-    init {
-        view.imageViewBlock.scaleType = ImageView.ScaleType.FIT_XY
-        view.imageViewBlock.setImageResource(resourceUnclearedMine)
-        view.setOnClickListener {
-            listener.onMineBlockClear(this)
-        }
-        view.setOnLongClickListener {
-            listener.onMineBlockFlag(this)
-
-            true
-        }
-        flagged = false
-        cleared = false
-        dangerLevel = 0
-    }
-
     var x = 0
     var y = 0
     var dangerLevel: Int = 0 // 0->none, -1 -> mined
@@ -79,4 +55,27 @@ class MineView : FrameLayout {
                 view.imageViewBlock.setImageResource(resourceUnclearedMine)
             }
         }
+
+    constructor(_listener: MineBlockListener? = null, context: Context) : super(context) {
+        if (_listener != null)
+            listener = _listener
+    }
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    init {
+        view.imageViewBlock.scaleType = ImageView.ScaleType.FIT_XY
+        view.imageViewBlock.setImageResource(resourceUnclearedMine)
+        view.setOnClickListener {
+            listener.onMineBlockClear(this)
+        }
+        view.setOnLongClickListener {
+            listener.onMineBlockFlag(this)
+
+            true
+        }
+        flagged = false
+        cleared = false
+        //dangerLevel = 0
+    }
 }

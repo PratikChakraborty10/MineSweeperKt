@@ -11,4 +11,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
+    <com.panch.minesweeperkt.view.MSKView
+            android:visibility="gone"
+            android:id="@+id/alternativeMskView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <Button
+            android:layout_gravity="bottom|end"
+            android:id="@+id/testButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
 </FrameLayout>
