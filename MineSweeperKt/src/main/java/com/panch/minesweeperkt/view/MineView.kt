@@ -12,6 +12,10 @@ import kotlinx.android.synthetic.main.layout_block.view.*
 class MineView : FrameLayout {
     private var view: View = inflate(context, R.layout.layout_block, this)
     private lateinit var listener: MineBlockListener
+    var resourceUnclearedMine = R.drawable.uncleared_mine
+    var resourceClearedMine = R.drawable.cleared_mine
+    var resourceFlag = R.drawable.ic_flag
+    var resourceMineBomb = R.drawable.mine_bomb
 
     constructor(_listener: MineBlockListener? = null, context: Context) : super(context) {
         if (_listener != null)
@@ -23,7 +27,7 @@ class MineView : FrameLayout {
 
     init {
         view.imageViewBlock.scaleType = ImageView.ScaleType.FIT_XY
-        view.imageViewBlock.setImageResource(R.drawable.uncleared_mine)
+        view.imageViewBlock.setImageResource(resourceUnclearedMine)
         view.setOnClickListener {
             listener.onMineBlockClear(this)
         }
@@ -43,6 +47,7 @@ class MineView : FrameLayout {
     var flagged: Boolean = false
         set(value) {
             field = value
+            view.imageViewFlag.setImageResource(resourceFlag)
             if (field) {
                 view.imageViewFlag.visibility = View.VISIBLE
             } else {
@@ -53,7 +58,7 @@ class MineView : FrameLayout {
         set(value) {
             field = value
             if (field) {
-                view.imageViewBlock.setImageResource(R.drawable.cleared_mine)
+                view.imageViewBlock.setImageResource(resourceClearedMine)
                 view.imageViewFlag.visibility = View.GONE
 
                 view.textViewBlock.text = dangerLevel.toString()
@@ -63,7 +68,7 @@ class MineView : FrameLayout {
                     }
                     -1 -> {
                         view.textViewBlock.visibility = View.GONE
-                        view.imageViewFlag.setImageResource(R.drawable.mine)
+                        view.imageViewFlag.setImageResource(resourceMineBomb)
                         view.imageViewFlag.visibility = View.VISIBLE
                         listener.onMineBlockExplode(this)
                     }
@@ -71,7 +76,7 @@ class MineView : FrameLayout {
                 }
 
             } else {
-                view.imageViewBlock.setImageResource(R.drawable.uncleared_mine)
+                view.imageViewBlock.setImageResource(resourceUnclearedMine)
             }
         }
 }

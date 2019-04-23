@@ -31,13 +31,19 @@ data class MSKMap(
     }
 
     fun foundAllMines(): Boolean {
-        val allBlocks = ArrayList<MineView>()
-        MSKBlocks.forEach { it.forEach { allBlocks.add(it) } }
-        val flaggedBlocks = allBlocks.filter { it.flagged }
-        val unclearedBlocks = allBlocks.filter { !it.cleared }
-        if (flaggedBlocks.isNotEmpty() && (unclearedBlocks.none { !it.flagged })) {
-            return flaggedBlocks.none { it.dangerLevel != -1 }
-        }
+        val flaggedBlocks = allBlocks().filter { it.flagged }
+        val unclearedBlocks = allBlocks().filter { !it.cleared }
+        val minedBlocks = allBlocks().filter { it.dangerLevel == -1 }
+
+        if (minedBlocks.isEmpty())
+            return false
+
+        if (unclearedBlocks.none { it.dangerLevel != -1 })
+            return true
+
+        if (flaggedBlocks.none { it.dangerLevel != -1 } && flaggedBlocks.size == minedBlocks.size)
+            return true
+
         return false
     }
 
@@ -59,10 +65,22 @@ data class MSKMap(
         }
     }
 
-    fun setBlockFlagged(x: Int, y: Int, flagged: Boolean = true) {
+    fun setBlockFlagged(x: Int, y: Int, flag: Boolean = true) {
+        if (flag) {
+            val flaggedBlocksCount = allBlocks().filter { it.flagged }.size
+            val minedBlocksCount = allBlocks().filter { it.dangerLevel == -1 }.size
+            if (flaggedBlocksCount == minedBlocksCount)
+                return
+        }
         val mineBlock = MSKBlocks[y][x]
         if (!mineBlock.cleared)
-            mineBlock.flagged = flagged
+            mineBlock.flagged = flag
+    }
+
+    private fun allBlocks(): ArrayList<MineView> {
+        val allBlocks = ArrayList<MineView>()
+        MSKBlocks.forEach { it.forEach { allBlocks.add(it) } }
+        return allBlocks
     }
 
     private fun MineView.surroundingBlocks(): ArrayList<MineView> {
