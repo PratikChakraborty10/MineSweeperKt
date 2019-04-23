@@ -60,6 +60,7 @@ class MineView : FrameLayout {
         if (_listener != null)
             listener = _listener
     }
+
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
