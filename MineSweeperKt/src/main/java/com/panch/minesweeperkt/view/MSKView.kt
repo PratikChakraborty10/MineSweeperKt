@@ -67,7 +67,7 @@ class MSKView : FrameLayout, MineBlockListener {
     }
 
     override fun onMineBlockFlag(mskBlock: MineView) {
-        if (!this.playable)
+        if (!this.playable || mskBlock.cleared || !generatedRealMap)
             return
 
         if (map != null) {
