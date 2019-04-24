@@ -71,6 +71,7 @@ class MSKView : FrameLayout, MineBlockListener {
             return
 
         if (map != null) {
+            listener?.onFlagMine(mskBlock)
             if (!mskBlock.flagged) {
                 if (playSoundOnFlagging) {
                     playSound(resourceFlaggingSound)
@@ -83,7 +84,6 @@ class MSKView : FrameLayout, MineBlockListener {
             if (map!!.foundAllMines()) {
                 this.playable = false
                 listener?.onFoundAllMines()
-                listener?.onGameEnded()
             }
         }
     }
@@ -93,6 +93,7 @@ class MSKView : FrameLayout, MineBlockListener {
             return
 
         if (map != null) {
+            listener?.onClearMine(mskBlock)
             if (!generatedRealMap) {
                 map!!.placeMines(mineCount, mskBlock)
                 map!!.setDangerLevels()
@@ -102,7 +103,6 @@ class MSKView : FrameLayout, MineBlockListener {
             if (map!!.foundAllMines()) {
                 this.playable = false
                 listener?.onFoundAllMines()
-                listener?.onGameEnded()
             }
         }
     }
@@ -116,7 +116,6 @@ class MSKView : FrameLayout, MineBlockListener {
             vibrate(vibrateDurationOnExplosion.toLong())
         }
         listener?.onMineExploded()
-        listener?.onGameEnded()
     }
 
     //Basic initialization.
@@ -181,7 +180,6 @@ class MSKView : FrameLayout, MineBlockListener {
             generatedRealMap = true
         }
         playable = true
-        listener?.onGameStarted()
     }
 
     //Restarts game with given width, height and mine count.

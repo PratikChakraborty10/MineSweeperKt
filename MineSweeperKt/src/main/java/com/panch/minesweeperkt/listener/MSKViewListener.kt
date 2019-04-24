@@ -1,8 +1,10 @@
 package com.panch.minesweeperkt.listener
 
+import com.panch.minesweeperkt.view.MineView
+
 interface MSKViewListener {
     fun onFoundAllMines()
     fun onMineExploded()
-    fun onGameStarted()
-    fun onGameEnded()
+    fun onFlagMine(mineView: MineView)
+    fun onClearMine(mineView: MineView)
 }

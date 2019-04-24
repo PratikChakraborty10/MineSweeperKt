@@ -6,6 +6,7 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import com.panch.minesweeperkt.listener.MSKViewListener
+import com.panch.minesweeperkt.view.MineView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,53 +14,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mskView.mineCount = 55
+        mskView.mineCount = 20
         mskView.resourceMineBomb = R.drawable.mine_bomb
         mskView.forceDrawingSquareBlocks = false
         mskView.listener = object : MSKViewListener {
             override fun onFoundAllMines() {
                 Toast.makeText(this@MainActivity, "Victory", Toast.LENGTH_SHORT).show()
+                Handler().postDelayed({ mskView.restart() }, 1000)
             }
 
-            override fun onGameStarted() {
-
+            override fun onFlagMine(mineView: MineView) {
+                Toast.makeText(this@MainActivity,mineView.flagged.toString(),Toast.LENGTH_LONG).show()
             }
 
             override fun onMineExploded() {
                 Toast.makeText(this@MainActivity, "Boom!", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onGameEnded() {
                 Handler().postDelayed({ mskView.restart() }, 1000)
             }
-        }
-        mskView.init(6, 10, true)
 
+            override fun onClearMine(mineView: MineView) {
 
-        testButton.setOnClickListener {
-            alternativeMskView.listener = object : MSKViewListener {
-                override fun onFoundAllMines() {
-                    Toast.makeText(this@MainActivity, "Victory", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onGameStarted() {
-
-                }
-
-                override fun onMineExploded() {
-                    Toast.makeText(this@MainActivity, "Boom!", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onGameEnded() {
-                    Handler().postDelayed({ alternativeMskView.restart() }, 1000)
-                }
             }
-            val importableMap = mskView.exportNonViewMap()
-            if (importableMap != null)
-                alternativeMskView.importNonViewMap(importableMap)
-            mskView.visibility = View.GONE
-            alternativeMskView.visibility = View.VISIBLE
         }
+        mskView.init(6, 8, true)
 
     }
 }
