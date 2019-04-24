@@ -305,6 +305,11 @@ class MSKView : FrameLayout, MineBlockListener {
             return
 
         if (map != null) {
+            if (!timerStarted) {
+                totalSeconds = 0
+                tickHandler.postDelayed(tickRunnable, 1000)
+                timerStarted = true
+            }
             map!!.clearBlock(x, y)
             if (map!!.foundAllMines()) {
                 this.playable = false
