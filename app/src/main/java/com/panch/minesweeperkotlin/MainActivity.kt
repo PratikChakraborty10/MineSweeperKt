@@ -3,6 +3,7 @@ package com.panch.minesweeperkotlin
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.panch.minesweeperkt.listener.MSKViewListener
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFlagMine(mineView: MineView) {
-                Toast.makeText(this@MainActivity,mineView.flagged.toString(),Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, mineView.flagged.toString(), Toast.LENGTH_LONG).show()
             }
 
             override fun onMineExploded() {
@@ -34,6 +35,10 @@ class MainActivity : AppCompatActivity() {
 
             override fun onClearMine(mineView: MineView) {
 
+            }
+
+            override fun onGameTimerTick(totalSeconds: Int) {
+                Log.e("tag", totalSeconds.toString())
             }
         }
         mskView.init(6, 8, true)

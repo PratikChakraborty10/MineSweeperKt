@@ -7,4 +7,5 @@ interface MSKViewListener {
     fun onMineExploded()
     fun onFlagMine(mineView: MineView)
     fun onClearMine(mineView: MineView)
+    fun onGameTimerTick(totalSeconds: Int)
 }

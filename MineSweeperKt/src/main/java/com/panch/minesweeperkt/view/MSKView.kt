@@ -16,6 +16,7 @@ import com.panch.minesweeperkt.model.MSKNonViewMap
 import kotlinx.android.synthetic.main.layout_mskview.view.*
 import android.os.VibrationEffect
 import android.os.Build
+import android.os.Handler
 import android.os.Vibrator
 
 
@@ -25,6 +26,10 @@ class MSKView : FrameLayout, MineBlockListener {
     private var generatedRealMap = false
     private var map: MSKMap? = null
     private var playable: Boolean = true
+    private val tickHandler: Handler = Handler()
+    private lateinit var tickRunnable: Runnable
+    private var totalSeconds = 0
+    private var timerStarted = false
     //endregion
 
     var resourceUnclearedMine = R.drawable.uncleared_mine
@@ -46,6 +51,16 @@ class MSKView : FrameLayout, MineBlockListener {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    init {
+        tickRunnable = Runnable {
+            listener?.onGameTimerTick(totalSeconds)
+            totalSeconds += 1
+            if (timerStarted) {
+                tickHandler.postDelayed(tickRunnable, 1000)
+            }
+        }
+    }
 
     private fun vibrate(durationInMilliseconds: Long = 500) {
         val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
@@ -94,6 +109,11 @@ class MSKView : FrameLayout, MineBlockListener {
 
         if (map != null) {
             listener?.onClearMine(mskBlock)
+            if (!timerStarted) {
+                totalSeconds = 0
+                tickHandler.postDelayed(tickRunnable, 1000)
+                timerStarted = true
+            }
             if (!generatedRealMap) {
                 map!!.placeMines(mineCount, mskBlock)
                 map!!.setDangerLevels()
@@ -103,12 +123,16 @@ class MSKView : FrameLayout, MineBlockListener {
             if (map!!.foundAllMines()) {
                 this.playable = false
                 listener?.onFoundAllMines()
+                timerStarted = false
+                tickHandler.removeCallbacks(tickRunnable)
             }
         }
     }
 
     override fun onMineBlockExplode(mskBlock: MineView) {
         this.playable = false
+        timerStarted = false
+        tickHandler.removeCallbacks(tickRunnable)
         if (playSoundOnMineExplosion) {
             playSound(resourceMineExplosionSound)
         }
