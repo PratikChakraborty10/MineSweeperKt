@@ -97,7 +97,6 @@ class MSKView : FrameLayout, MineBlockListener {
                 map!!.placeMines(mineCount, mskBlock)
                 map!!.setDangerLevels()
                 generatedRealMap = true
-                listener?.onGameStarted()
             }
             map!!.clearBlock(mskBlock.x, mskBlock.y)
             if (map!!.foundAllMines()) {
@@ -121,7 +120,7 @@ class MSKView : FrameLayout, MineBlockListener {
     }
 
     //Basic initialization.
-    fun init(width: Int, height: Int) {
+    fun init(width: Int, height: Int, placeMinesAtStart: Boolean = false) {
         val _map = MSKMap(width, height, ArrayList())
         for (y in 0 until height) {
             val horizontalBlocks = ArrayList<MineView>()
@@ -176,7 +175,13 @@ class MSKView : FrameLayout, MineBlockListener {
                     FrameLayout.LayoutParams.MATCH_PARENT
         }
         generatedRealMap = false
+        if (placeMinesAtStart) {
+            map!!.placeMines(mineCount)
+            map!!.setDangerLevels()
+            generatedRealMap = true
+        }
         playable = true
+        listener?.onGameStarted()
     }
 
     //Restarts game with given width, height and mine count.

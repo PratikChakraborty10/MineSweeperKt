@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mskView.mineCount = 24
+        mskView.mineCount = 55
         mskView.resourceMineBomb = R.drawable.mine_bomb
         mskView.forceDrawingSquareBlocks = false
         mskView.listener = object : MSKViewListener {
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                 Handler().postDelayed({ mskView.restart() }, 1000)
             }
         }
-        mskView.init(15, 24)
+        mskView.init(6, 10, true)
 
 
         testButton.setOnClickListener {

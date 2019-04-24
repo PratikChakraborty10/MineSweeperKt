@@ -7,17 +7,25 @@ data class MSKMap(
     val height: Int,
     val MSKBlocks: ArrayList<ArrayList<MineView>>
 ) {
-    fun placeMines(count: Int, firstClearedMine: MineView) {
+    fun placeMines(count: Int, firstClearedMine: MineView? = null) {
         var placedMines = 0
         while (placedMines != count) {
             val randX = (0 until width).random()
             val randY = (0 until height).random()
-            if (randX != firstClearedMine.x && randY != firstClearedMine.y) {
+            if (firstClearedMine == null) {
                 if (MSKBlocks[randY][randX].dangerLevel != -1) {
                     MSKBlocks[randY][randX].dangerLevel = -1
                     placedMines++
                 }
+            } else {
+                if (randX != firstClearedMine.x && randY != firstClearedMine.y) {
+                    if (MSKBlocks[randY][randX].dangerLevel != -1) {
+                        MSKBlocks[randY][randX].dangerLevel = -1
+                        placedMines++
+                    }
+                }
             }
+
         }
     }
 
