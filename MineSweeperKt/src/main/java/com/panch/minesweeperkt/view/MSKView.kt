@@ -47,6 +47,27 @@ class MSKView : FrameLayout, MineBlockListener {
     var forceDrawingSquareBlocks = false
     var mineCount = 24
     var listener: MSKViewListener? = null
+    var locked = false
+        set(value) {
+            if (value) {
+                if (map != null) {
+                    map!!.MSKBlocks.forEach {
+                        it.forEach {
+                            it.locked = true
+                        }
+                    }
+                }
+            } else {
+                if (map != null) {
+                    map!!.MSKBlocks.forEach {
+                        it.forEach {
+                            it.locked = false
+                        }
+                    }
+                }
+            }
+            field = value
+        }
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)

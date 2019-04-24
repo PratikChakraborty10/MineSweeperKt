@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         mskView.mineCount = 20
         mskView.resourceMineBomb = R.drawable.mine_bomb
         mskView.forceDrawingSquareBlocks = false
+
         mskView.listener = object : MSKViewListener {
             override fun onFoundAllMines() {
                 Toast.makeText(this@MainActivity, "Victory", Toast.LENGTH_SHORT).show()
@@ -46,6 +47,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         mskView.init(6, 8, true)
-
+        mskView.locked = false
     }
 }

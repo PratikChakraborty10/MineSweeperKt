@@ -10,6 +10,7 @@ import com.panch.minesweeperkt.listener.MineBlockListener
 import kotlinx.android.synthetic.main.layout_block.view.*
 
 class MineView : FrameLayout {
+
     private var view: View = inflate(context, R.layout.layout_block, this)
     private lateinit var listener: MineBlockListener
     var resourceUnclearedMine = R.drawable.uncleared_mine
@@ -17,6 +18,7 @@ class MineView : FrameLayout {
     var resourceFlag = R.drawable.ic_flag
     var resourceMineBomb = R.drawable.mine_bomb
 
+    var locked = false
     var x = 0
     var y = 0
     var dangerLevel: Int = 0 // 0->none, -1 -> mined
@@ -75,10 +77,12 @@ class MineView : FrameLayout {
         view.imageViewBlock.scaleType = ImageView.ScaleType.FIT_XY
         view.imageViewBlock.setImageResource(resourceUnclearedMine)
         view.setOnClickListener {
-            listener.onMineBlockClear(this)
+            if (!locked)
+                listener.onMineBlockClear(this)
         }
         view.setOnLongClickListener {
-            listener.onMineBlockFlag(this)
+            if (!locked)
+                listener.onMineBlockFlag(this)
 
             true
         }
