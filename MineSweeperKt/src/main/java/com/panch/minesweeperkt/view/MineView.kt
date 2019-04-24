@@ -48,7 +48,14 @@ class MineView : FrameLayout {
                         view.imageViewFlag.visibility = View.VISIBLE
                         listener.onMineBlockExplode(this)
                     }
-                    else -> view.textViewBlock.visibility = View.VISIBLE
+                    else -> {
+                        when {
+                            dangerLevel <= 3 -> view.textViewBlock.setTextColor(context.resources.getColor(R.color.colorDangerLevelLow))
+                            dangerLevel <= 5 -> view.textViewBlock.setTextColor(context.resources.getColor(R.color.colorDangerLevelMedium))
+                            dangerLevel <= 8 -> view.textViewBlock.setTextColor(context.resources.getColor(R.color.colorDangerLevelHigh))
+                        }
+                        view.textViewBlock.visibility = View.VISIBLE
+                    }
                 }
 
             } else {

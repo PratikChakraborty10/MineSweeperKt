@@ -8,4 +8,5 @@ interface MSKViewListener {
     fun onFlagMine(mineView: MineView)
     fun onClearMine(mineView: MineView)
     fun onGameTimerTick(totalSeconds: Int)
+    fun onLeftMineCountChangedBasedOnFlags(leftMinesBasedOnFlagsCount: Int)
 }

@@ -96,6 +96,7 @@ class MSKView : FrameLayout, MineBlockListener {
                 }
             }
             map!!.setBlockFlagged(mskBlock.x, mskBlock.y, !mskBlock.flagged)
+            listener?.onLeftMineCountChangedBasedOnFlags(map!!.leftMineCountBasedOnFlags())
             if (map!!.foundAllMines()) {
                 this.playable = false
                 listener?.onFoundAllMines()
