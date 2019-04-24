@@ -277,15 +277,37 @@ class MSKView : FrameLayout, MineBlockListener {
 
     //Clears the block at given coords. Use this if you need to. Otherwise, not necessary.
     fun clearBlockAt(x: Int, y: Int) {
+        if (!this.playable)
+            return
+
         if (map != null) {
             map!!.clearBlock(x, y)
+            if (map!!.foundAllMines()) {
+                this.playable = false
+                listener?.onFoundAllMines()
+            }
         }
     }
 
     //Flags the block at given coords. Use this if you need to. Otherwise, not necessary.
     fun flagBlockAt(x: Int, y: Int, flag: Boolean = true) {
+        if (!this.playable || !generatedRealMap)
+            return
+
         if (map != null) {
+            if (flag) {
+                if (playSoundOnFlagging) {
+                    playSound(resourceFlaggingSound)
+                }
+                if (vibrateOnFlag) {
+                    vibrate(vibrateDurationOnFlag.toLong())
+                }
+            }
             map!!.setBlockFlagged(x, y, flag)
+            if (map!!.foundAllMines()) {
+                this.playable = false
+                listener?.onFoundAllMines()
+            }
         }
     }
 }
