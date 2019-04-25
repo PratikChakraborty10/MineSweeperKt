@@ -121,6 +121,8 @@ class MSKView : FrameLayout, MineBlockListener {
             listener?.onLeftMineCountChangedBasedOnFlags(map!!.leftMineCountBasedOnFlags())
             if (map!!.foundAllMines()) {
                 this.playable = false
+                timerStarted = false
+                tickHandler.removeCallbacks(tickRunnable)
                 listener?.onFoundAllMines()
             }
         }
@@ -147,9 +149,9 @@ class MSKView : FrameLayout, MineBlockListener {
             map!!.clearBlock(mskBlock.x, mskBlock.y)
             if (map!!.foundAllMines()) {
                 this.playable = false
-                listener?.onFoundAllMines()
                 timerStarted = false
                 tickHandler.removeCallbacks(tickRunnable)
+                listener?.onFoundAllMines()
             }
         }
     }
