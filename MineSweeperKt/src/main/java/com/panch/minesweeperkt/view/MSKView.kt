@@ -332,6 +332,7 @@ class MSKView : FrameLayout, MineBlockListener {
         if (map != null) {
             if (!timerStarted) {
                 totalSeconds = 0
+                moves = 0
                 tickHandler.postDelayed(tickRunnable, 1000)
                 timerStarted = true
             }
