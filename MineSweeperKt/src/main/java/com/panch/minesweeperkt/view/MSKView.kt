@@ -335,6 +335,7 @@ class MSKView : FrameLayout, MineBlockListener {
                 tickHandler.postDelayed(tickRunnable, 1000)
                 timerStarted = true
             }
+            moves += 1
             map!!.clearBlock(x, y)
             if (map!!.foundAllMines()) {
                 this.playable = false
