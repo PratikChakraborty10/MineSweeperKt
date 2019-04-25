@@ -36,14 +36,15 @@ class MainActivity : AppCompatActivity() {
 
             override fun onClearMine(mineView: MineView) {
 
+
             }
 
             override fun onGameTimerTick(totalSeconds: Int) {
-                Log.e("tag", totalSeconds.toString())
+
             }
 
             override fun onLeftMineCountChangedBasedOnFlags(leftMinesBasedOnFlagsCount: Int) {
-                Log.e("tag",leftMinesBasedOnFlagsCount.toString())
+
             }
         }
         mskView.init(6, 8, true)

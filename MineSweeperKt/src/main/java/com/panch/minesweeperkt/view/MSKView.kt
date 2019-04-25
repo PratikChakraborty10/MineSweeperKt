@@ -68,6 +68,7 @@ class MSKView : FrameLayout, MineBlockListener {
             }
             field = value
         }
+    var moves = 0
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -130,12 +131,14 @@ class MSKView : FrameLayout, MineBlockListener {
             return
 
         if (map != null) {
-            listener?.onClearMine(mskBlock)
             if (!timerStarted) {
                 totalSeconds = 0
+                moves = 0
                 tickHandler.postDelayed(tickRunnable, 1000)
                 timerStarted = true
             }
+            moves += 1
+            listener?.onClearMine(mskBlock)
             if (!generatedRealMap) {
                 map!!.placeMines(mineCount, mskBlock)
                 map!!.setDangerLevels()
@@ -361,5 +364,10 @@ class MSKView : FrameLayout, MineBlockListener {
                 listener?.onFoundAllMines()
             }
         }
+    }
+
+    //Gets surrounding blocks of MineView
+    fun surroundingBlocks(mineView: MineView): List<MineView>? {
+        return map?.surroundingMines(mineView)
     }
 }

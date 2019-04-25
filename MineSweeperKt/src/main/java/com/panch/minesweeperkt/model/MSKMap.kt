@@ -85,6 +85,10 @@ data class MSKMap(
             mineBlock.flagged = flag
     }
 
+    fun surroundingMines(mineView: MineView): List<MineView> {
+        return mineView.surroundingBlocks()
+    }
+
     fun leftMineCountBasedOnFlags(): Int {
         val flaggedBlocks = allBlocks().filter { !it.cleared && it.flagged }.size
         val minedBlocks = allBlocks().filter { it.dangerLevel == -1 }.size
