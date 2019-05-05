@@ -40,30 +40,52 @@ Step 1. Include MSKView in your Activity's or Fragment's layout.
 ...
 ```
 
-Step 2. Bind the MSKViewListener listener.
+Step 2. Bind the MSKViewListener. It's function names are pretty self explanatory.
 
 ```
  mskView.listener = object : MSKViewListener {
-            ...
+            override fun onFoundAllMines() {
+	    	//This will be triggered when player finds all the mines on the field.
+	    }
+
+            override fun onFlagMine(mineView: MineView) {
+	    	//This will be triggered on flagging a block. It will also pass the cleared block's view.
+	    }
+
+            override fun onMineExploded() {
+	    	//This will be triggered on mine explosion.
+	    }
+
+            override fun onClearMine(mineView: MineView) {
+	    	//This will be triggered on clearing a block. It will also pass the cleared block's view.
+	    }
+
+            override fun onGameTimerTick(totalSeconds: Int) {
+	    	//This will be triggered each second passes during game time. You can get the total seconds from totalSeconds parameter.
+	    }
+
+            override fun onLeftMineCountChangedBasedOnFlags(leftMinesBasedOnFlagsCount: Int) {
+		//This will be triggered whenever a block is flagged. It will give you the amount of mines left based on the flags on the 		  //map. However it's only assumption, it doesn't mean that flag locations are correct.
+	    }
 }
 ```
 Step 3. Set customizations from a set of rules.
 ```
-*resourceUnclearedMine
-*resourceClearedMine
-*resourceFlag
-*resourceMineBomb
-*resourceMineExplosionSound
-*resourceFlaggingSound
-*playSoundOnMineExplosion
-*playSoundOnFlagging
-*vibrateOnFlag
-*vibrateOnExplosion
-*vibrateDurationOnFlag
-*vibrateDurationOnExplosion
-*forceDrawingSquareBlocks
-*mineCount
-*locked
+mskView.resourceUnclearedMine 
+mskView.resourceClearedMine
+mskView.resourceFlag
+mskView.resourceMineBomb
+mskView.resourceMineExplosionSound
+mskView.resourceFlaggingSound
+mskView.playSoundOnMineExplosion
+mskView.playSoundOnFlagging
+mskView.vibrateOnFlag
+mskView.vibrateOnExplosion
+mskView.vibrateDurationOnFlag
+mskView.vibrateDurationOnExplosion
+mskView.forceDrawingSquareBlocks
+mskView.mineCount
+mskView.locked
 ```
 
 Step 3. Initialize the view. Width and height are how many blocks should be created horizontally and vertically. Third parameter determines whether user might find a mine on the first cleared block or not. If set to false, there is no way to find a mine on first block.
