@@ -49,7 +49,8 @@ Step 2. Bind the MSKViewListener. It's function names are pretty self explanator
 	    }
 
             override fun onFlagMine(mineView: MineView) {
-	    	//This will be triggered on flagging a block. It will also pass the cleared block's view.
+	    	//This will be triggered on flagging a block.
+		//It will also pass the cleared block's view.
 	    }
 
             override fun onMineExploded() {
@@ -57,35 +58,40 @@ Step 2. Bind the MSKViewListener. It's function names are pretty self explanator
 	    }
 
             override fun onClearMine(mineView: MineView) {
-	    	//This will be triggered on clearing a block. It will also pass the cleared block's view.
+	    	//This will be triggered on clearing a block. 
+		//It will also pass the cleared block's view.
 	    }
 
             override fun onGameTimerTick(totalSeconds: Int) {
-	    	//This will be triggered each second passes during game time. You can get the total seconds from totalSeconds parameter.
+	    	//This will be triggered each second passes during game time.
+		//You can get the total seconds from totalSeconds parameter.
 	    }
 
             override fun onLeftMineCountChangedBasedOnFlags(leftMinesBasedOnFlagsCount: Int) {
-		//This will be triggered whenever a block is flagged. It will give you the amount of mines left based on the flags on the      	map. However it's only assumption, it doesn't mean that flag locations are correct.
+		//This will be triggered whenever a block is flagged. 
+		//It will give you the amount of mines left based on the flags on the map.
+		//However it's only assumption, it doesn't mean that flag locations are correct.
 	    }
 }
 ```
 Step 3. Set customizations from a set of rules.
 ```
-mskView.resourceUnclearedMine 
-mskView.resourceClearedMine
-mskView.resourceFlag
-mskView.resourceMineBomb
-mskView.resourceMineExplosionSound
-mskView.resourceFlaggingSound
-mskView.playSoundOnMineExplosion
-mskView.playSoundOnFlagging
-mskView.vibrateOnFlag
-mskView.vibrateOnExplosion
-mskView.vibrateDurationOnFlag
-mskView.vibrateDurationOnExplosion
-mskView.forceDrawingSquareBlocks
-mskView.mineCount
-mskView.locked
+mskView.resourceUnclearedMine = //Drawable resource - Sets the image of block's uncleared state.
+mskView.resourceClearedMine = //Drawable resource - Sets the image of block's cleared state.
+mskView.resourceFlag = //Drawable resource - Sets the image of block's flagged state.
+mskView.resourceMineBomb = //Drawable resource - Sets the image of block's exploded state.
+mskView.resourceMineExplosionSound = //Raw resource - Sets the sound of mine explosion.
+mskView.resourceFlaggingSound = //Raw resource - Sets the sound of flagging.
+mskView.playSoundOnMineExplosion = //Boolean - Turns off/on sound on mine explosion.
+mskView.playSoundOnFlagging = //Boolean - Turns off/on sound on flagging.
+mskView.vibrateOnFlag = //Boolean - Turns off/on vibration on flagging.
+mskView.vibrateOnExplosion = //Boolean - Turns off/on vibration on mine explosion.
+mskView.vibrateDurationOnFlag = 500 //Integer - Sets the vibrate duration on flagging.
+mskView.vibrateDurationOnExplosion = 500 //Integer - Sets the vibrate duration on mine explosion.
+mskView.forceDrawingSquareBlocks = false //Boolean - Forces msk view to draw only square blocks.
+mskView.mineCount = 24 //Integer - Sets the minecount. You should set this before initializing the msk view.
+mskView.locked = false //Boolean - Changes the game state to playable or not.
+mskView.moves = 0 //Int - This value is the current total moves of the player.
 ```
 
 Step 3. Initialize the view. Width and height are how many blocks should be created horizontally and vertically. Third parameter determines whether user might find a mine on the first cleared block or not. If set to false, there is no way to find a mine on first block.
