@@ -65,7 +65,7 @@ Step 2. Bind the MSKViewListener. It's function names are pretty self explanator
 	    }
 
             override fun onLeftMineCountChangedBasedOnFlags(leftMinesBasedOnFlagsCount: Int) {
-		//This will be triggered whenever a block is flagged. It will give you the amount of mines left based on the flags on the 		  //map. However it's only assumption, it doesn't mean that flag locations are correct.
+		//This will be triggered whenever a block is flagged. It will give you the amount of mines left based on the flags on the      	map. However it's only assumption, it doesn't mean that flag locations are correct.
 	    }
 }
 ```
