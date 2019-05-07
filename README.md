@@ -76,16 +76,16 @@ Step 2. Bind the MSKViewListener. It's function names are pretty self explanator
 ```
 Step 3. Set customizations from a set of rules.
 ```
-mskView.resourceUnclearedMine = //Drawable resource - Sets the image of block's uncleared state.
-mskView.resourceClearedMine = //Drawable resource - Sets the image of block's cleared state.
-mskView.resourceFlag = //Drawable resource - Sets the image of block's flagged state.
-mskView.resourceMineBomb = //Drawable resource - Sets the image of block's exploded state.
-mskView.resourceMineExplosionSound = //Raw resource - Sets the sound of mine explosion.
-mskView.resourceFlaggingSound = //Raw resource - Sets the sound of flagging.
-mskView.playSoundOnMineExplosion = //Boolean - Turns off/on sound on mine explosion.
-mskView.playSoundOnFlagging = //Boolean - Turns off/on sound on flagging.
-mskView.vibrateOnFlag = //Boolean - Turns off/on vibration on flagging.
-mskView.vibrateOnExplosion = //Boolean - Turns off/on vibration on mine explosion.
+mskView.resourceUnclearedMine = R.drawable.--- //Drawable resource - Sets the image of block's uncleared state.
+mskView.resourceClearedMine = R.drawable.--- //Drawable resource - Sets the image of block's cleared state.
+mskView.resourceFlag = R.drawable.--- //Drawable resource - Sets the image of block's flagged state.
+mskView.resourceMineBomb = R.drawable.--- //Drawable resource - Sets the image of block's exploded state.
+mskView.resourceMineExplosionSound = R.raw.--- //Raw resource - Sets the sound of mine explosion.
+mskView.resourceFlaggingSound = R.raw.--- //Raw resource - Sets the sound of flagging.
+mskView.playSoundOnMineExplosion = true //Boolean - Turns off/on sound on mine explosion.
+mskView.playSoundOnFlagging = true //Boolean - Turns off/on sound on flagging.
+mskView.vibrateOnFlag = true //Boolean - Turns off/on vibration on flagging.
+mskView.vibrateOnExplosion = true //Boolean - Turns off/on vibration on mine explosion.
 mskView.vibrateDurationOnFlag = 500 //Integer - Sets the vibrate duration on flagging.
 mskView.vibrateDurationOnExplosion = 500 //Integer - Sets the vibrate duration on mine explosion.
 mskView.forceDrawingSquareBlocks = false //Boolean - Forces msk view to draw only square blocks.
